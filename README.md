@@ -11,7 +11,7 @@ Nesta etapa inicial, foquei em consolidar conceitos fundamentais de Python:
 ---
 
 ### 📈 Próximos Passos (Evolução prevista):
-- [X] **Refatoração para POO:** Transformar a lógica procedural em Classes e Objetos.
+- [ ] **Refatoração para POO:** Transformar a lógica procedural em Classes e Objetos.
 - [ ] **Persistência de Dados:** Implementar integração com Banco de Dados.
 - [ ] **Interface Gráfica:** Criar uma UI para substituir o terminal.
 
