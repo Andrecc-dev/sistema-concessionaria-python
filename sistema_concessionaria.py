@@ -3,7 +3,7 @@
 #primeiramente criei um dicionário de carros, com  marca dele, depois os modelos e preços
 #esse é o dicionário de compra
 carros = {
-    "porsche": {
+    "Porsche": {
         "911 GT3": 1700000.0,
         "Cayenne Turbo": 850000.0,
         "Panamera 4S": 900000.0,
@@ -81,7 +81,7 @@ aluguel ={
 #Já ess dicionário é a lista de desejos de carros que a conscessionária deseja ter na loja.
 #para o usuário vender somente a lista pré-determinada d carros
 carros_desejado = {
-    "porsche": {
+    "Porsche": {
         "911 Turbo S": 1750000.0,
         "Cayenne E-Hybrid": 950000.0,
         "Panamera GTS": 1100000.0,
@@ -233,13 +233,13 @@ def escolher_marca(dicionario_carros, mensagem="Escolha a marca: "):
 #essas são as listas de marcas
              
 #essas são as marcas disponíveis para a compra 
-marcas = ["porsche", "audi", "nissan", "volkswagen"]
+marcas = ["Porsche", "Audi", "Nissan", "Volkswagen"]
 
 #essas são as marcas disponíveis para aluguel
-marcas_aluguel =["porsche", "audi", "nissan", "volkswagen", "bmw"]
+marcas_aluguel =["Porsche", "Audi", "Nissan", "Volkswagen", "BMW"]
 
 #marcas que a concessionária deseja comprar dos clientes
-marcas_desejadas =["porsche,", "audi", "nissan", "volkswagen"]
+marcas_desejadas =["Porsche", "Audi", "Nissan", "Volkswagen"]
 
 #===== LOOP PRINCIPAL =====
 
