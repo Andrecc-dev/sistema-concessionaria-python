@@ -2,108 +2,173 @@
 
 #primeiramente criei um dicionário de carros, com  marca dele, depois os modelos e preços
 #esse é o dicionário de compra
-carros = {
-    "Porsche": {
-        "911 GT3": 1700000.0,
-        "Cayenne Turbo": 850000.0,
-        "Panamera 4S": 900000.0,
-        "Macan GTS": 600000.0,
-        "718 Cayman": 500000.0,
-        "Taycan Turbo": 1200000.0,
-        "911 Carrera": 800000.0
-    },
-    "audi": {
-        "A3 Sedan S-Line": 227383.0,
-        "Q3 Prestige": 225084.0,
-        "A4 Avant": 240000.0,
-        "Q5 Black Edition": 270000.0,
-        "A6 Sedan": 350000.0,
-        "RS7 Performance": 800000.0,
-        "e-tron GT": 650000.0
-    },
-    "nissan": {
-        "GT-R": 700000.0,
-        "Frontier Attack": 210000.0,
-        "Kicks Exclusive": 120000.0,
-        "Sentra SL": 130000.0,
-        "Leaf": 180000.0,
-        "Versa Advance": 95000.0,
-        "X-Trail": 200000.0
-    },
-    "volkswagen": {
-        "Golf GTI": 170000.0,
-        "Tiguan R-Line": 220000.0,
-        "Nivus Highline": 150000.0,
-        "Virtus GTS": 145000.0,
-        "T-Cross Comfortline": 135000.0,
-        "Passat R-Line": 250000.0,
-        "Polo GTS": 140000.0
-    }
-}
-#esse aqui é outro dicionário dessa vez, de alugel, onde o client poderá escolher o carro a ser alugado, com o valor da diária
-aluguel ={ 
+# === BANCO DE DADOS (DATA BASE) ===
+
+TABELA_FIPE = {
     "porsche": {
-        "718 Cayman S": 9500.0,
-        "Macan S": 7600.0,
-        "Cayenne Coupé": 8700.0,
-        "911 Turbo": 15000.0,
-        "Panamera 4 E-Hybrid": 12000.0
+        "911 carrera s": 1162000.00,
+        "911 turbo s": 1950000.00,
+        "911 gt3": 1920000.00,
+        "taycan turbo s": 12500000.00,
+        "mascan t": 625000.00,
+        "macan eletric": 560000.00,
+        "cayenne e-hybrid": 815000.00,
+        "cayenne turbo gt": 1631000.00,
+        "718 cayman gt4": 1523000.00,
+        "panamera 4s e-hybrid": 1212000.00
+    },
+    "bmw": {
+        "320i m sport": 346900.00,
+        "m3 competition": 894950.00,
+        "x1 sdrive20i": 330950.00,
+        "x5 xdrive50e": 859950.00,
+        "x7 m60i": 1026000.00,
+        "m2 coupe": 683950.00,
+        "i7 xdrive60": 1373000.00,
+        "ix m60": 1101000.00,
+        "z4 m40i": 624950.00,
+        "serie 8 gran coupe": 999000.00
     },
     "audi": {
-        "A3 Sedan": 850.0,
-        "Q3 Performance": 1100.0,
-        "A5 Coupé": 1600.0,
-        "RS5 Sportback": 4500.0,
-        "e-tron quattro": 2300.0
+        "a3 sedan": 289990.00,
+        "rs3 sedan": 659990.00,
+        "rs6 avant performace": 1251000.00,
+        "q3 sportback": 353990.00,
+        "q5 tfsle": 480990.00,
+        "q8 e-tron": 729990.00,
+        "e-tron gtr": 769990.00,
+        "rs q8": 1295000.00,
+        "q6 e-tron": 529990.00,
+        "a5 sportback": 360990.00
     },
-    "nissan": {
-        "Kicks Sense": 350.0,
-        "Sentra Advance": 420.0,
-        "Versa Exclusive": 380.0,
-        "Frontier PRO-4X": 900.0,
-        "X-Trail Hybrid": 750.0
+    "mercedes-benz": {
+        "classe a 200 amg": 376900.00,
+        "c 300 amg line": 450000.00,
+        "e 300 eexclusive": 589900.00,
+        "g 63 amg": 1989900.00,
+        "amg gt 63 e-performace": 1967000.00,
+        "glc 300 matic": 539000.00,
+        "gle 45d": 844900.00,
+        "eqs sedan": 1453000.00,
+        "sl 63 amg roadster": 1750000.00
+    },
+    "ferrari": {
+        "roma spider": 3850000.00,
+        "296 gtb": 3999000.00,
+        "sf90 stradale": 6900000.00,
+        "purosangue": 7200000.00,
+        "812 comptizione": 6500000.00,
+        "f8 tributo": 4200000.00,
+        "portofino m": 7900000.00,
+        "12cilindri": 5500000.00,
+        "daytona sp3": 15000000.00,
+        "296 gts": 4300000.00
     },
     "volkswagen": {
-        "Golf R": 1800.0,
-        "Tiguan Allspace": 900.0,
-        "Virtus Highline": 520.0,
-        "Nivus Comfortline": 450.0,
-        "T-Cross Highline": 600.0
+        "polo gts": 155000.00,
+        "golf gti": 320000.00,
+        "virtus exclusive": 154000.00,
+        "jetta gli": 254000.00,
+        "t-cross highline": 180000.00,
+        "taos highline": 215000.00,
+        "tiguan allspace": 285000.00,
+        "id.4": 330000.00,
+        "id.buzz (kombi)": 450000.00,
+        "touareg r-hybrid": 650000.00
     },
-    "bmw":{
-        "320i Sport": 1700.0,
-        "X1 sDrive": 1400.0,
-        "M135i": 2400.0,
-        "X3 M40i": 3600.0,
-        "M3 Competition": 8000.0
+    "toyota": {
+        "corolla xre": 158000.00,
+        "corolla cross xre": 178000.00,
+        "hillux srx": 324000.00,
+        "sw4 diamnond": 433000.00,
+        "yaris hatch xls": 122000.00,
+        "yaris sendan xls": 127000.00,
+        "rav4 hybrid": 349000.00,
+        "gr corolla": 416000.00,
+        "carmy hibrid": 360000.00,
+        "prius hybrid": 280000.00
     }
 }
-#Já ess dicionário é a lista de desejos de carros que a conscessionária deseja ter na loja.
-#para o usuário vender somente a lista pré-determinada d carros
-carros_desejado = {
-    "Porsche": {
-        "911 Turbo S": 1750000.0,
-        "Cayenne E-Hybrid": 950000.0,
-        "Panamera GTS": 1100000.0,
-        "Taycan 4S": 1300000.0
+
+TABELA_ALUGUEL = {
+    "porsche": {
+        "718 boxter style edition (conversivel)": 1800.00,
+        "cayne couple platinum": 1400.00,
+        "panamera platinum edition": 1600.00,
+        "macan started (entrada)": 900.00
     },
-    "nissan": {
-        "370Z": 250000.0,
-        "Navara": 220000.0,
-        "Juke Nismo": 140000.0,
-        "Note e-POWER": 160000.0
+    "bmw": {
+        "z4 sdrive30i (conversivel)": 1300.00,
+        "x3 m400i (suv esportivo)": 1100.00,
+        "serie 4 cabrio": 1450.00,
+        "i4 edrive35 (eletrico)": 1000.00
     },
     "audi": {
-        "Q7": 420000.0,
-        "A5 Sportback": 270000.0,
-        "RS6 Avant": 950000.0,
-        "e-tron SUV": 680000.0
+        "q7 55 tfsi (7 lugares)": 1200.00,
+        "a5 cabriolet": 1350.00,
+        "tt rs coupe": 1700.00,
+        "q8 55 tfsi": 1500.00
+    },
+    "mercedes-benz": {
+        "classe v (vans de luxo)": 1100.00,
+        "glb 200 (7 lugares)": 850.00,
+        "cle coupe (lançamento)": 1400.00,
+        "eqe suv (eletrico luxo)": 1600.00
+    },
+    "ferrari": {
+        "california t": 4500.00,
+        "488 gtb": 6000.00,
+        "gtc4lusso (4 lugares)": 5500.00
     },
     "volkswagen": {
-        "Arteon": 190000.0,
-        "ID.4": 210000.0,
-        "Taos": 175000.0,
-        "Golf R-Line": 180000.0
+        "amarock v6 extreme": 750.00,
+        "id. buzz (kombi eletrica)": 950.00,
+        "nivus highline": 400.00,
+        "tiguan r-line": 600.00
+    },
+    "toyota": {
+        "hillux gr-sport": 800.00,
+        "corolla croos hibryd": 500.00,
+        "sw4 gr-sport (7 lugares)": 950.00,
+        "rav4 plug-in hybrid": 700.00
+    }
+}
+
+TABELA_DESEJO = {
+    "porsche": {
+        "911 s/t (edição 60 anos)": 2500000.00,
+        "918 spider": 12000000.00,
+        "mission x (conceito)": 15000000.00 
+    },
+    "bmw": {
+        "3.0 csl (ultra limitada)": 4500000.00,
+        "m5 touring (lançamento)": 1100000.00,
+        "m4 csl": 1300000.00 
+    },
+    "audi": {
+        "r8 v10 gt rwd (o ultimo r8)": 2100000.00,
+        "rs6 gt (edição especial de colecionador)": 1400000.00,
+        "rs e-tron gt ice race edition": 900000.00
+    },
+    "mercedes-benz": {
+        "mercedes-amg one (motor de formula 1)": 25000000.00,
+        "project mybach": 5000000.00,
+        "g-class ev (eqg)": 1200000.00 
+    },
+    "ferrari": {
+        "f40 (clássica)": 18000000.00,
+        "leferrari": 22000000.00,
+        "ferrari monza sp2": 12500000.00
+    },
+    "volkswagen": {
+        "golf r 333": 450000.00,
+        "xl1": 1000000.00,
+        "id. gti concept": 350000.00
+    },
+    "toyota": {
+        "lfa (lexus/toyota)": 8000000.00,
+        "supra mk4 (reliquia)": 800000.00,
+        "gr super sport": 10000000.00
     }
 }
 #aqui foi criado um dicionário chamado inventário, para quando o cliente vender o carro, ele ser movido temporariamente
