@@ -2,8 +2,6 @@
 
 #primeiramente criei um dicionário de carros, com  marca dele, depois os modelos e preços
 #esse é o dicionário de compra
-# === BANCO DE DADOS (DATA BASE) ===
-
 TABELA_FIPE = {
     "porsche": {
         "911 carrera s": 1162000.00,
@@ -171,63 +169,64 @@ TABELA_DESEJO = {
         "gr super sport": 10000000.00
     }
 }
-#aqui foi criado um dicionário chamado inventário, para quando o cliente vender o carro, ele ser movido temporariamente
-#para o invetário e depois o vendedor adicioná-lo a loja
-inventario ={ }
-#Aqui é criado um ID para o carro, para o vendedor poder adicionar o carro a loja principal com uma maior facilidade
-ultimo_id_inventario = 0
 
-#esse dois dicionários são responsáveis por armazenar os dados do usuário, ou seja, os dados de vendedor e de cliente que o usuário digitar
-vendedor = { } #dados do vendedor logado
-cliente = { } #dados do cliente logado
+# Mantenha os dicionários como estão
+inventario = {}
+ultimo_id_inventario = 0
+vendedor = {} 
+cliente = {} 
 
 print("===== BEM VINDO A CONCESSIONÁRIA DOS UCHIHAS =====")
-#comando para decidir se você vai querer entrar na loja como vendedo ou cliente (apenas uma das opções)
-pessoa = int(input("você é um vendedor ou um cliente da loja? (1 para cliente | 2 para vendedor): "))
 
-match pessoa:
-    case 1: #caso você escolha 1, faz o cadrastro de cliente
-        print("===== CADRASTRO CLIENTE =====")
-        cliente ={
-            "nome": input("nome: "),
-            "email": input("endereço eletrônico (Email): "),
-            "saldo": float(input("saldo atual (R$): "))
-        }
-        print("\nCliente Cadrastrado com sucesso!")
+# Colocamos um loop para garantir o cadastro
+while True:
+    try:
+        pessoa = int(input("Você é um vendedor ou um cliente da loja? (1 para cliente | 2 para vendedor): "))
 
-    case 2: #caso escolha 2, faz o cadrastro de vendedor
-        print("===== CADRASTRO VENDEDOR =====")
-        vendedor ={
-            "nome": input("nome: "),
-            "email": input("endereço eletrônico (Email): "),
-            "id": int(input("ID do vendedor: "))
-        }
-        print("\nVendedor cadrastrado com sucesso!")
+        if pessoa == 1:
+            print("\n===== CADASTRO CLIENTE =====")
+            cliente = {
+                "nome": input("Nome: "),
+                "email": input("Email: "),
+                "saldo": float(input("Saldo atual (R$): "))
+            }
+            print("\nCliente Cadastrado com sucesso!")
+            break # Cadastro feito, sai do loop
 
-    case _: #caso a opção seja inválida
-        print("opção não encontrada, tente novamente")
+        elif pessoa == 2:
+            print("\n===== CADASTRO VENDEDOR =====")
+            vendedor = {
+                "nome": input("Nome: "),
+                "email": input("Email: "),
+                "id": int(input("ID do vendedor: "))
+            }
+            print("\nVendedor cadastrado com sucesso!")
+            break # Cadastro feito, sai do loop
 
+        else:
+            print("Opção não encontrada, tente novamente (1 ou 2).")
+            
+    except ValueError:
+        print("Entrada inválida! Por favor, digite um número.")
 
-#aqui é definido o menudo cliente, exibido quando o usuário escolhe o menu cliente
+# As funções de menu estão PERFEITAS, não precisa mexer:
 def menu_cliente():
-        print("\n===== MENU DO CLIENTE =====")
-        print("1- comprar carro")
-        print("2 - alugar carro")
-        print("3- ver preços dos carros")
-        print("4- vender carro para a loja")
-        print("5- voltar ao menu principal")
-        
+    print("\n===== MENU DO CLIENTE =====")
+    print("1- comprar carro")
+    print("2- alugar carro")
+    print("3- ver preços dos carros")
+    print("4- vender carro para a loja")
+    print("5- voltar ao menu principal")
 
-
-#Aqui é defenido o menu do vendedor, exibido quando o usuário escolhe o menu vendedor
 def menu_vendedor():
-        print("\n===== MENU VENDEDOR =====")
-        print(" 1- registrar carro novo no estoque")
-        print(" 2- consultar tabela FIPE")
-        print(" 3- ver invetário da loja")
-        print(" 4- voltar ao menu incial")
-        print(" 5- sair")
+    print("\n===== MENU VENDEDOR =====")
+    print("1- registrar carro novo no estoque")
+    print("2- consultar tabela FIPE")
+    print("3- ver inventário da loja")
+    print("4- voltar ao menu inicial")
+    print("5- sair")
 
+    
 #aqui é definido a função de escolher o modelo, tanto como número quanto por nome do carro
 def escolher_modelo(modelos_lista, mensagem="Escolha um modelo: "):
     modelo_real = None
@@ -323,10 +322,10 @@ while True:
                         print("\n Nós temos essas marcas disponíveis: ")
                         
                         #mostra as marcas e modelos dispníveis para a compra
-                        escolha_marca, modelo_real = mostrar_marcas_e_modelos(carros, cliente['saldo'])
+                        escolha_marca, modelo_real = mostrar_marcas_e_modelos(TABELA_FIPE, cliente['saldo'])
 
                         # cálculo do preço final
-                        preco_base = carros[escolha_marca][modelo_real]
+                        preco_base = TABELA_FIPE[escolha_marca][modelo_real]
                         preco_final = preco_base * 1.25
                         print(f"\nPreço base: R$ {preco_base:.2f}")
                         print(f"Na nossa concessionária temos um acréscimo de 25% do preço do carro em cima da tabela FIPE.")
@@ -339,7 +338,7 @@ while True:
                                     cliente["saldo"] -= preco_final
 
                                     #se confirmar, vai remover o carro do estoque
-                                    del carros[escolha_marca][modelo_real]
+                                    del TABELA_FIPE[escolha_marca][modelo_real]
                                     print("\nCompra realizada com sucesso!")
                                     print(f"Saldo restante: R$ {cliente['saldo']:.2f}")
                                     print("\nObrigado por comprar em nossa loja, até mais!")
@@ -353,10 +352,10 @@ while True:
                         print("Carros disponíveis para aluguel:\n")
 
                         #Aqui vai mostrar as marcas e modelos de carro disponíveis para o aluguel
-                        marca_alugar, modelo_real = mostrar_marcas_e_modelos(aluguel, cliente['saldo'])
+                        marca_alugar, modelo_real = mostrar_marcas_e_modelos(TABELA_ALUGUEL, cliente['saldo'])
 
                         #pega o valor da diária do aluguel do carro
-                        preco_dia = aluguel[marca_alugar][modelo_real]
+                        preco_dia = TABELA_ALUGUEL[marca_alugar][modelo_real]
 
                             # escolher tipo de aluguel
                         print("\n1 - Aluguel diário")
@@ -393,7 +392,7 @@ while True:
                     case 3: #Aqui é o menu de consultar preços
                         print("===== TABELA DE PREÇOS - COMPRA =====")
                         #mostra o preço dos carros disponíveis para a compra
-                        for marca, modelos in carros.items():
+                        for marca, modelos in TABELA_FIPE.items():
                             print(f"marca: {marca}")
                             modelos_lista = list(modelos.keys())
                             for i, modelo in enumerate(modelos_lista, start=1):
@@ -401,7 +400,7 @@ while True:
 
                         print("\n===== TABELA DE PREÇOS - ALUGUEL (por dia) =====\n")
                         #Mostra o preço dos carros disponíveis para o aluguel
-                        for marca, modelos in aluguel.items():
+                        for marca, modelos in TABELA_ALUGUEL.items():
                             print(f"\nMarca: {marca}")
                             modelos_lista = list(modelos.keys())
                             for i, modelo in enumerate(modelos_lista, start=1):
@@ -413,12 +412,12 @@ while True:
 
                         # usar a função para escolher marca e modelo
                         while True:
-                            escolha_marca, modelo_real = mostrar_marcas_e_modelos(carros_desejado)
+                            escolha_marca, modelo_real = mostrar_marcas_e_modelos(TABELA_DESEJO)
                             if escolha_marca is not None:
                                 break  # marca válida, sai do loop
 
                         # cálculo do valor
-                        preco_base = carros_desejado[escolha_marca][modelo_real]
+                        preco_base = TABELA_DESEJO[escolha_marca][modelo_real]
                         preco_final = preco_base * 0.88  # desconto de 12%
 
                         print(f"\nOferta da loja pelo {modelo_real}: R$ {preco_final:.2f} (desconto de 12%)")
@@ -491,10 +490,10 @@ while True:
                                 preco = dados["preco_compra"]
                                 
                                 #adiciona o carro ao estoque oficalde carros, removendo ele do invetário
-                                if marca not in carros:
-                                    carros[marca] = {}
+                                if marca not in TABELA_FIPE:
+                                    TABELA_FIPE[marca] = {}
                                 
-                                carros[marca][modelo] = preco
+                                TABELA_FIPE[marca][modelo] = preco
                                 del inventario[escolha]
                                 
                                 print(f"\nCarro {marca} {modelo} registrado com sucesso oficialmente na loja de carros!")
@@ -503,7 +502,7 @@ while True:
 
                     case 2:#consulta o preço de todos os carros da loja
                         print("===== CONSULTA TABELA FIPE =====")
-                        for marca, modelos in carros.items():
+                        for marca, modelos in TABELA_FIPE.items():
                             print(f"\nMarca: {marca}")
                             for modelo, preco in modelos.items():
                                 print(f"- {modelo}: R$ {preco:.2f}")
